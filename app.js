@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const config = require('config');
+const port = config.get('server.port');
+
 var http = require("http");
 var express = require('express');
 
@@ -21,8 +24,6 @@ app.get("/aboutus",function(req,res){
 app.get("/imprint",function(req,res){
   res.render('imprint',{title: "Imprint"})
 });
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,5 +51,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-server.listen(3000);
-console.log("Server listen to port 3000");
+server.listen(port);
+console.log(`Server listen to port ${port}`);
